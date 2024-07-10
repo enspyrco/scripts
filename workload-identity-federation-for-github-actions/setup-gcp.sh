@@ -43,3 +43,11 @@ gcloud iam service-accounts add-iam-policy-binding "${SERVICE_ACCOUNT_NAME}@${PR
   --project="${PROJECT_ID}" \
   --role="roles/iam.workloadIdentityUser" \
   --member="principalSet://iam.googleapis.com/${WORKLOAD_IDENTITY_POOL_ID}/attribute.repository/${REPO}"
+# Show the value of WORKLOAD_IDENTITY_PROVIDER for adding as an Actions secret
+gcloud iam workload-identity-pools providers describe "${WORKLOAD_PROVIDER}" \
+  --project="${PROJECT_ID}" \
+  --location="global" \
+  --workload-identity-pool="${WORKLOAD_IDENTITY_POOL}" \
+  --format="value(name)"
+# Show the value of SERVICE_ACCOUNT_EMAIL for adding as an Actions secret
+echo ${SERVICE_ACCOUNT_NAME}@${PROJECT_ID}.iam.gserviceaccount.com
